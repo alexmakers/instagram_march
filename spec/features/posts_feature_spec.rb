@@ -26,9 +26,16 @@ describe 'creating posts' do
     visit '/posts/new'
     fill_in 'Title', with: 'My new post'
     fill_in 'Description', with: 'Lorem ipsum'
+    attach_file 'Picture', Rails.root.join('spec/images/old-man1.jpg')
+
     click_button 'Post it!'
 
     expect(current_path).to eq posts_path
     expect(page).to have_content 'My new post'
+    expect(page).to have_css 'img.uploaded-pic'
   end
+
+
+
+
 end

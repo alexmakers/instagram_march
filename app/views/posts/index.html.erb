@@ -4,6 +4,7 @@
   <% @posts.each do |post| %>
     <h2><%= post.title %></h2>
     <p><%= post.description %></p>
+    <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
   <% end %>
 <% end %>
 
