@@ -1,15 +1,60 @@
-<% if @posts.none? %>
-  No posts yet
-<% else %>
-  <% @posts.each do |post| %>
-    <h2><%= post.title %></h2>
-    <p><%= post.description %></p>
-    <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Hello, world!</h1>
+    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    <p>
+      <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+    </p>
+  </div>
+</div>
 
-    <% if post.user == current_user %>
-      <%= link_to 'Delete', post_path(post), method: :delete %>
-    <% end %>
+<div class='container'>
+  <% if @posts.none? %>
+    No posts yet
+  <% else %>
+    <div class='row'>
+      <% @posts.each do |post| %>
+        <div class='col-sm-4'>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= post.title %></h3>
+            </div>
+            <div class="panel-body">
+              <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+              <p>
+                <% post.tags.each do |tag| %>
+                  <%= link_to tag.name, '#' %>
+                <% end %>
+              </p>
+              <div class='buttons'>
+                <% if post.user == current_user %>
+                  <%= link_to 'Delete', post_path(post), method: :delete, class: 'btn btn-lg btn-danger' %>
+                <% end %>
+                <%= link_to 'Show More', '#', class: 'btn btn-lg btn-info', data: { toggle: 'modal', target: ".image-modal-#{post.id}" } %>
+              </div>
+            </div>
+          </div>
+        </div>  
+
+        <div class="modal fade image-modal-<%= post.id %>">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><%= post.title %></h4>
+              </div>
+
+              <div class='modal-body'>
+                <%= image_tag post.picture.url %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
   <% end %>
-<% end %>
 
-<%= link_to 'New post', new_post_path %>
+  <%= link_to 'New post', new_post_path %>
+</div>

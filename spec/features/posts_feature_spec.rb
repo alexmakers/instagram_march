@@ -11,7 +11,7 @@ describe 'posts' do
   end
 
   context 'with posts' do
-    before { Post.create(title: 'Cool post', description: 'Hello world') }
+    before { create(:post) }
 
     it 'displays the posts' do
       visit '/posts'
@@ -33,7 +33,7 @@ describe 'creating posts' do
 
   context 'logged in' do
     before do
-      user = User.create(email: 'alex@a.com', password: '12345678', password_confirmation: '12345678')
+      user = create(:user)
       login_as user
     end
 
@@ -55,9 +55,9 @@ end
 describe 'deleting posts' do
   context 'my post' do
     before do
-      alex = User.create(email: 'alex@a.com', password: '12345678', password_confirmation: '12345678')
+      alex = create(:user)
       login_as alex
-      Post.create(title: 'Hello', description: 'World', user: alex)
+      create(:post, user: alex)
     end
 
     it 'is removed from the posts page' do
@@ -70,9 +70,10 @@ describe 'deleting posts' do
 
   context 'not my post' do
     before do
-      alex = User.create(email: 'alex@a.com', password: '12345678', password_confirmation: '12345678')
-      emma = User.create(email: 'emma@a.com', password: '12345678', password_confirmation: '12345678')
-      Post.create(title: "Emma's pic", description: 'Test', user: emma)
+      
+      alex = create(:user)
+      emma = create(:user, email: 'emma@a.com')
+      create(:post, title: "Emma's pic", user: emma)
 
       login_as alex
     end
@@ -83,5 +84,3 @@ describe 'deleting posts' do
     end
   end
 end
-
-

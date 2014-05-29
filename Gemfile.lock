@@ -43,6 +43,8 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.1.2)
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
     builder (3.2.2)
     capybara (2.2.1)
       mime-types (>= 1.16)
@@ -71,6 +73,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (2.0.7)
@@ -168,10 +175,12 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  bootstrap-sass
   capybara
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
+  factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
   paperclip!
