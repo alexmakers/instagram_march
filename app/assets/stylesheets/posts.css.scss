@@ -10,3 +10,11 @@
 .bootstrap-tagsinput {
   min-width: 300px;
 }
+
+.btn-default.btn-like:active {
+  color: red;
+}
+
+.btn-default.btn-like:not(:active) {
+  transition: color 2s ease;
+}
