@@ -18,7 +18,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    raise 'hi'
     @post = current_user.posts.find params[:id]
     @post.destroy
 

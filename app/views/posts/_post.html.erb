@@ -4,7 +4,9 @@
       <h3 class="panel-title"><%= post.title %></h3>
     </div>
     <div class="panel-body">
-      <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+      <% if post.picture.exists? %>
+        <%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+      <% end %>
       <p>
         <%= render post.tags %>
       </p>
@@ -15,6 +17,8 @@
         <%= link_to 'Show More', '#', class: 'btn btn-lg btn-info', data: { toggle: 'modal', target: ".image-modal-#{post.id}" } %>
 
         <%= link_to "❤ #{post.likes.count}", post_likes_path(post), class: 'btn btn-lg btn-default btn-like' %>
+
+        <%= link_to "Buy", new_post_charge_path(post), class: 'btn btn-lg btn-default' %>
       </div>
     </div>
   </div>
@@ -29,7 +33,9 @@
       </div>
 
       <div class='modal-body'>
-        <%= image_tag post.picture.url %>
+        <% if post.picture.exists? %>
+          <%= image_tag post.picture.url %>
+        <% end %>
       </div>
     </div>
   </div>

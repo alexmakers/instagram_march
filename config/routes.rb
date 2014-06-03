@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :admins
   root 'posts#index'
   
   devise_for :users
   resources :posts do
+    resources :charges
     resources :likes
     resources :comments do
       resources :likes
@@ -10,4 +12,5 @@ Rails.application.routes.draw do
   end
 
   resources :tags
+  resources :orders
 end

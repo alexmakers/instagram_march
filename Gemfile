@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 
 gem 'thin'
 gem 'websocket-rails'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 group :test, :development do
   gem 'rspec-rails'
