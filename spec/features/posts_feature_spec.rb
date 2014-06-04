@@ -42,6 +42,7 @@ describe 'creating posts' do
       fill_in 'Title', with: 'My new post'
       fill_in 'Description', with: 'Lorem ipsum'
       attach_file 'Picture', Rails.root.join('spec/images/old-man1.jpg')
+      fill_in 'Address', with: '25 City Road, London'
 
       click_button 'Post it!'
 
@@ -82,5 +83,19 @@ describe 'deleting posts' do
       visit '/posts'
       expect(page).not_to have_link "Delete"
     end
+  end
+end
+
+describe 'maps for posts' do
+  it 'shows a map button if post has an address' do
+    create(:post, address: '1 High St, London')
+    visit '/posts'
+    expect(page).to have_link 'Map'
+  end
+
+  it 'does not show a map button for posts without an address' do
+    create(:post)
+    visit '/posts'
+    expect(page).not_to have_link 'Map'
   end
 end
